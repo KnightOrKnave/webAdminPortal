@@ -10,11 +10,14 @@ app.use(express.urlencoded({extended:true}));
 
 app.get('/',(req,res)=>{
   res.end(`
+  <head>
+  <title>admin portal</title>
+  </head>
  <html>
  <body>
-  <form>
-  <textarea rows="40" cols="80">${json}</textarea>
-  <button>Submit</button>
+  <form action="/" method="post" name="form1">
+  <textarea name="textarea1" rows="40" cols="80">${json}</textarea>
+  <input type="submit"></input>
   </form>
  </body>
  </html> 
@@ -22,7 +25,10 @@ app.get('/',(req,res)=>{
 });
 
 app.post('/',(req,res)=>{
-  json=JSON.stringify(req.body,null,2);
+  const newJson=JSON.parse(req.body.textarea1);
+  json=JSON.stringify(newJson,null,2);
+  console.log(newJson);
+  res.redirect('/');
 })
 
 
