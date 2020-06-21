@@ -1,7 +1,11 @@
 const express=require('express');
-const port=process.env.PORT||3000;
+const fs=require('fs');
 
-let json=JSON.stringify({key:"value",key2:"value2",key3:[1,3,5,7,9]},null,2);
+const port=process.env.PORT||3000;
+const targetFileName=process.env.FILENAME||"setting.json";
+
+let file=fs.readFileSync(`${__dirname}/data/${targetFileName}`,'utf-8');
+let json=JSON.stringify(JSON.parse(file),null,2);
 
 //express setting
 const app=express();
